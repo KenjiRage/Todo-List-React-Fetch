@@ -4,6 +4,17 @@ function App() {
   const [list, setList] = useState([]);
   const [input, setInput] = useState("");
 
+  useEffect(()=> {
+			getTodos();
+	},[])
+	
+	const getTodos = async() => {
+		const response = await fetch("https://assets.breatheco.de/apis/fake/todos/user/manuelcebador");
+		const data = await response.json();
+		console.log(data);
+		
+	};	
+  
   const addTodo = (todo) => {
     const newTodo = {
       id: Math.random(),
