@@ -78,7 +78,7 @@ const Home = () => {
 							if(todo.label !== "Manuel"){
 								return <div key={index} className="row">	  
 								<p className=" col-8 d-flex justify-content-start">{todo.label}</p>
-								<button onClick={() => deleteTodo(todo.id)}>&times;</button>
+								<button onClick={() => deleteTodo(index)}>&times;</button>
 						  </div>
 							}
 							
