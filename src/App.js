@@ -1,19 +1,72 @@
 import React, { useState,useEffect } from "react";
 
+const Home = () => {
+
+	const [todoList, setTodoList] = useState([]);
+
+//Peticiones FETCH	
+
+	useEffect(() => {
+		getTodos()
+		
+	},[]);
+
+	const getTodos = async () => {
+       	
+		const response = await fetch("https://assets.breatheco.de/apis/fake/todos/user/manuelcebador");
+		const data = await response.json();
+		setTodoList(data);
+	  };
+
+	const addTodo = async (todo) => {
+		
+		const updatedTodos1 = [...todoList, { label: todo, done: false }];
+		const response = await fetch("https://assets.breatheco.de/apis/fake/todos/user/manuelcebador", {
+		  method: "PUT",
+		  body: JSON.stringify(updatedTodos1),
+		  headers: {
+			"Content-Type": "application/json"
+		  }
+		});
+		
+		const data = await response.json();
+		setTodoList([...todoList, {label: todo, done: false }]);
+	  };
+	
+	const deleteTodo = async (index) => {
+		
+		const updatedTodos2 = todoList.filter((t, i) => i !== index);
+		const response = await fetch("https://assets.breatheco.de/apis/fake/todos/user/manuelcebador", {
+		  method: "PUT",
+		  body: JSON.stringify(updatedTodos2),
+		  headers: {
+			"Content-Type": "application/json"
+		  }
+		});
+		
+		const data = await response.json();
+		setTodoList(updatedTodos2);
+	  };
+
+    const clearTodos = async () => {
+	    await fetch("https://assets.breatheco.de/apis/fake/todos/user/manuelcebador", {
+	    method: "PUT",
+	    body: JSON.stringify([{label: "Pepito", done: false}]),
+	    headers: {
+		"Content-Type": "application/json"
+	  }
+	    });
+	    setTodoList([]);
+        };
+  
+//Lógica de los componentes
+	
+return (
+
 function App() {
   const [list, setList] = useState([]);
   const [input, setInput] = useState("");
 
-  useEffect(()=> {
-			getTodos();
-	},[])
-	
-	const getTodos = async() => {
-		const response = await fetch("https://assets.breatheco.de/apis/fake/todos/user/manuelcebador");
-		const data = await response.json();
-		console.log(data);
-		
-	};	
   
   const addTodo = (todo) => {
     const newTodo = {
