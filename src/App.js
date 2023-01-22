@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react";
 
 
-//create your first component
 const Home = () => {
 
 	const [todoList, setTodoList] = useState([]);
@@ -61,13 +60,13 @@ const Home = () => {
 	    setTodoList([]);
         };
   
-//Lógica de los componentes
+
 	
     return (
 	
-		<div className="d-flex justify-content-center">
-    		<div className="align-self-center">
-			    <input className=" form-control text-center " placeholder="Add Todo" 
+<div className="d-flex justify-content-center">
+    	<div className="align-self-center">
+		<input className=" form-control text-center " placeholder="Add Todo" 
 					   onKeyUp={(e) => {
 						if(e.key === "Enter" &&
 						e.target.value.trim() !== "" &&
@@ -84,7 +83,7 @@ const Home = () => {
 							}
 							
 						
-					})}
+						})}
 
 				<div className="row p-3 border">{todoList.length > 1 ? `${todoList.length} todos`:"no hay tareas"}</div>
 				<button onClick={clearTodos}>Clear All</button>
