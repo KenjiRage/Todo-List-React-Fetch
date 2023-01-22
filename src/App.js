@@ -53,7 +53,7 @@ const Home = () => {
     const clearTodos = async () => {
 	    await fetch("https://assets.breatheco.de/apis/fake/todos/user/manuelcebador", {
 	    method: "PUT",
-	    body: JSON.stringify([{label: "Pepito", done: false}]),
+	    body: JSON.stringify([{label: "Manuel", done: false}]),
 	    headers: {
 		"Content-Type": "application/json"
 	  }
@@ -64,13 +64,10 @@ const Home = () => {
 //Lógica de los componentes
 	
     return (
-		<div className="text-center m-5">
-		<div className="container">
-			<div className=" row">
-								
-				<div className=" col-4 m-auto">
-			          
-					  <input className=" form-control text-center " placeholder="Add Todo" 
+	
+		<div className="d-flex justify-content-center">
+    		<div className="align-self-center">
+			    <input className=" form-control text-center " placeholder="Add Todo" 
 					   onKeyUp={(e) => {
 						if(e.key === "Enter" &&
 						e.target.value.trim() !== "" &&
@@ -79,26 +76,24 @@ const Home = () => {
 							e.target.value = "";
 						} }}/>{
 						todoList.map((todo, index) => {
-							if(todo.label !== "Pepito"){
-								return <div key={index} className=" mostrar row alert border">	  
+							if(todo.label !== "Manuel"){
+								return <div key={index} className="row">	  
 								<p className=" col-8 d-flex justify-content-start">{todo.label}</p>
-								<p className=" ocultar offset-2 col-2" onClick={() => {
-									deleteTodo(index)
-								}}><i className="fa-solid fa-trash"></i></p>
+								<button onClick={() => deleteTodo(e.target.value)}>&times;</button>
 						  </div>
 							}
 							
 						
 					})}
 
-				<div className="row p-3 border">{todoList.length > 1 ? `${todoList.length - 1} todos`:"no hay tareas"}</div>
+				<div className="row p-3 border">{todoList.length > 1 ? `${todoList.length} todos`:"no hay tareas"}</div>
 				<button onClick={clearTodos}>Clear All</button>
 
 			    </div>
-			</div>
-		</div>    
 		</div>
+		   
+		
 	);
 };
 
-export default Home;   
+export default Home;
