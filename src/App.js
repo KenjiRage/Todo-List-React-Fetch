@@ -1,5 +1,7 @@
-import React, { useState,useEffect } from "react";
+import React, {useState, useEffect} from "react";
 
+
+//create your first component
 const Home = () => {
 
 	const [todoList, setTodoList] = useState([]);
@@ -61,52 +63,42 @@ const Home = () => {
   
 //Lógica de los componentes
 	
-return (
+    return (
+		<div className="text-center m-5">
+		<div className="container">
+			<div className=" row">
+								
+				<div className=" col-4 m-auto">
+			          
+					  <input className=" form-control text-center " placeholder="Add Todo" 
+					   onKeyUp={(e) => {
+						if(e.key === "Enter" &&
+						e.target.value.trim() !== "" &&
+						!todoList.some(todo => todo.label === e.target.value.trim())){
+							addTodo(e.target.value)
+							e.target.value = "";
+						} }}/>{
+						todoList.map((todo, index) => {
+							if(todo.label !== "Pepito"){
+								return <div key={index} className=" mostrar row alert border">	  
+								<p className=" col-8 d-flex justify-content-start">{todo.label}</p>
+								<p className=" ocultar offset-2 col-2" onClick={() => {
+									deleteTodo(index)
+								}}><i className="fa-solid fa-trash"></i></p>
+						  </div>
+							}
+							
+						
+					})}
 
-function App() {
-  const [list, setList] = useState([]);
-  const [input, setInput] = useState("");
+				<div className="row p-3 border">{todoList.length > 1 ? `${todoList.length - 1} todos`:"no hay tareas"}</div>
+				<button onClick={clearTodos}>Clear All</button>
 
-  
-  const addTodo = (todo) => {
-    const newTodo = {
-      id: Math.random(),
-      todo: todo,
-    };
+			    </div>
+			</div>
+		</div>    
+		</div>
+	);
+};
 
-    // add the todo to the list
-    setList([...list, newTodo]);
-
-    // clear input box
-    setInput("");
-  };
-
-  const deleteTodo = (id) => {
-    // Filter out todo with the id
-    const newList = list.filter((todo) => todo.id !== id);
-
-    setList(newList);
-  };
-
-  return (
-    <div>
-      <h1>Todo List</h1>
-      <input
-        type="text"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-      />
-      <button onClick={() => addTodo(input)}>Add</button>
-      <ul>
-        {list.map((todo) => (
-          <li key={todo.id}>
-            {todo.todo}
-            <button onClick={() => deleteTodo(todo.id)}>&times;</button>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-export default App;
+export default Home;   
